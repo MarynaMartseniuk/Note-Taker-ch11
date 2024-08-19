@@ -36,6 +36,8 @@ const getNotes = () =>
     }
   });
 
+//add a rote to GET note by ID
+//to display note (user has clicked on) (from the left-hand column notes list) in the right-hand column
 const getIdNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'GET',
