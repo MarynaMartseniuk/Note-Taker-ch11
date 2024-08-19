@@ -5,4 +5,14 @@ const notes = require('express').Router();
     res.json(notesData)
   });
 
+  notes.get('/api/notes/:id', (req, res) => {
+    res.json(notesData)
+  }); 
   
+  notes.post('/api/notes', (req, res) => {
+    res.json(notesData)
+  });
+
+  notes.delete('/api/notes/:id', (req, res) => {
+    res.json(notesData)
+  });
