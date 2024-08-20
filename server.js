@@ -2,8 +2,10 @@
 const express = require('express');
 const path = require('path');
 
-// const notesData = require('./db.json');
-// const api = require('./routes/index');
+const notesData = require('./db/db.json');
+// const api = require('./routes/index.js');
+
+const api = require('./public/assets/js/index')
 
 const app = express();
 const PORT = 3001;
@@ -15,23 +17,27 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Send all 'localhost:3001/api' routes to the routes folder to use the index.js
-// app.use('/api', api);
+app.use('/api', api);
 
 //3.routes
 // sourse: UofU bootcamp, module 11, activity 05
 // a get URL 'localhost:3001/notes' request from user will bring/display to user the notes.html file 
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'notes.html'))
-
+    console.log('notes.html page has been displayed');
     // display all existing notes in the left-hand column
-    //renderNoteList();
+    getAndRenderNotes();
+    console.log('code jumped to the next step after request to execute getAndRenderNotes()');
+    console.log(getNotes);
     // all nav-btn are not visible
 });
 
 app.get('/api/notes', (req, res) => {
-  //res.json(notesData);
-  console.log('hi!');
-  res.send('Hello World!')
+  res.json(notesData);
+  console.log(res.json(notesData));
+  // console.log('app.get for (/api/notes) URL works. Put your code in here');
+  // res.send('code for (/api/notes) URL is comming soon');
+  
   
 });
 
