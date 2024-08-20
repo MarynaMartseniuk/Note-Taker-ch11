@@ -28,6 +28,19 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// =========================
+
+const notesGET = () =>
+  fetch('/notes', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((res) => res.json())
+  .then((data) => data );
+
+// =========================
+
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -203,9 +216,3 @@ if (window.location.pathname === '/notes') {
 
 getAndRenderNotes();
 
-const backButton = document.querySelector('#backBtn');
-
-backButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    window.location.replace("./index.html");
-});
