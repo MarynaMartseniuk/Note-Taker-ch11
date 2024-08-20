@@ -37,8 +37,7 @@ const notesGET = () =>
       'Content-Type': 'application/json'
     }
   }).then((res) => res.json())
-  .then((data) => data);
-
+  .then((data) => data );
 
 // =========================
 
