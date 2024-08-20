@@ -25,16 +25,15 @@ app.use('/api', api);
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'notes.html'))
     console.log('notes.html page has been displayed');
-    // display all existing notes in the left-hand column
-    getAndRenderNotes();
     console.log('code jumped to the next step after request to execute getAndRenderNotes()');
     console.log(getNotes);
-    // all nav-btn are not visible
 });
 
 app.get('/api/notes', (req, res) => {
+  
   res.json(notesData);
   console.log(res.json(notesData));
+
   // console.log('app.get for (/api/notes) URL works. Put your code in here');
   // res.send('code for (/api/notes) URL is comming soon');
   
