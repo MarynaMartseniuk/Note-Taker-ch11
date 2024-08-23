@@ -1,14 +1,15 @@
 //1.consts declaation:
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const notesData = require('./db/db.json');
+const id = require('./helpers/id.js');
 // const api = require('./routes/index.js');
-
 //const api = require('./public/assets/js/index')
 
 const app = express();
-const PORT = 3001;
+const PORT = 3000;
 
 // 2.Middleware:
 // Middleware to use folder Public with static data
@@ -26,19 +27,65 @@ app.use(express.urlencoded({ extended: true }));
 // a get URL 'localhost:3001/notes' request from user will bring/display to user the notes.html file 
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/notes.html'))
-    console.log('@@@@@@@@@@@@@@@code is inside of app.get(/notes) on a server.js');
+    console.log('@@@@@@@@@@@@@@@code got inside of app.get(/notes) on a server.js');
 });
+
+
+
 
 app.get('/api/notes', (req, res) => {
   
   res.json(notesData);
+  console.log('###############code got inside of app.get(/api/notes) on a server.js');
   console.log(res.json(notesData));
 
-  // console.log('app.get for (/api/notes) URL works. Put your code in here');
-  // res.send('code for (/api/notes) URL is comming soon');
-  
   
 });
+
+
+
+
+
+app.post('/api/notes', (req, res) => {
+  
+  // console.log(req.body);
+   const { title, text } = req.body;
+  console.log('hello 53');
+  // reqNote = JSON.parse(req.body);
+  if (req.body) {
+    console.log('hello 56');
+    const newNote = {
+      title: title,
+      text: text,
+      id: id(),
+    };
+    console.log(newNote);
+    // fs.appendFile('db.json', JSON.stringify(newNote));
+
+    //fs.appendFile('db.json', newNote);
+
+    fs.appendFile('./db/db.json', JSON.stringify(newNote), (err) => {
+      if (err) {
+        console.error('Error writing to file:', err);
+      } else {
+        console.log('Data successfully appended to file!');
+      }
+    });
+  };
+
+});
+
+// fs.appendFile('filename.txt', 'Data to append', (err) => {
+//   if (err) {
+//     console.error('Error writing to file:', err);
+//   } else {
+//     console.log('Data successfully appended to file!');
+//   }
+// });
+
+
+
+
 
 
 // a get URL 'localhost:3001/*' request from user will bring/display to user the landing page (home-page) , which is index.html file. '*' - stands for any user input
