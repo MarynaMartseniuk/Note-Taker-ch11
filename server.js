@@ -1,10 +1,11 @@
 //1.consts declaation:
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const notesData = require('./db/db.json');
+const id = require('./helpers/id.js');
 // const api = require('./routes/index.js');
-
 //const api = require('./public/assets/js/index')
 
 const app = express();
@@ -26,18 +27,69 @@ app.use(express.urlencoded({ extended: true }));
 // a get URL 'localhost:3001/notes' request from user will bring/display to user the notes.html file 
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/notes.html'))
-    console.log('@@@@@@@@@@@@@@@code is inside of app.get(/notes) on a server.js');
+    console.log('@@@@@@@@@@@@@@@code got inside of app.get(/notes) on a server.js');
 });
+
 
 app.get('/api/notes', (req, res) => {
   
   res.json(notesData);
+  console.log('###############code got inside of app.get(/api/notes) on a server.js');
   console.log(res.json(notesData));
+ 
+});
 
-  // console.log('app.get for (/api/notes) URL works. Put your code in here');
-  // res.send('code for (/api/notes) URL is comming soon');
+app.post('/api/notes', (req, res) => {
   
-  
+  // console.log(req.body);
+  console.log('hello 45');
+  const { title, text } = req.body;
+  console.log('hello 47');
+  // reqNote = JSON.parse(req.body);
+  if (req.body) {
+    console.log('hello 50');
+    const newNote = {
+      title: title,
+      text: text,
+      id: id(),
+    };
+    console.log(newNote);
+    console.log('hello 57');
+
+    // function appendNewNote(newData) {
+    const  appendNewNote = (newData) => {
+      // let's get data from db.json, then add new data (a new note) to it, and then write updated data to db.json. So this way we can add a new data correctly (inside of an existing array)
+      fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+
+          console.error(err);
+          return;
+
+        } else {
+
+          console.log(data);
+          console.log('hello 67')
+          const fileData = JSON.parse(data);
+          console.log(fileData);
+          console.log('hello 70');
+          fileData.push(newData);
+          
+          fs.writeFile('./db/db.json', JSON.stringify(fileData), err => {
+            if (err) {
+              console.error(err);
+            };
+          });
+
+        };
+
+      });
+     
+    };
+
+    appendNewNote(newNote);
+
+  };
+
 });
 
 
