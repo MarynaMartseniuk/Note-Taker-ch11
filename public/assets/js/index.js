@@ -156,6 +156,7 @@ const renderNoteList = async (notes) => {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
+  // ================================================
   let noteListItems = [];
 
   //=================================================
@@ -220,7 +221,6 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   clearBtn.addEventListener('click', renderActiveNote);
   noteForm.addEventListener('input', handleRenderBtns);
-  // noteList.addEventListener('click', renderActiveNote);
 }
 
 //===================================================

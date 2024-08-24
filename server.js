@@ -35,7 +35,7 @@ app.get('/api/notes', (req, res) => {
   
   res.json(notesData);
   console.log('###############code got inside of app.get(/api/notes) on a server.js');
-  console.log(res.json(notesData));
+  // console.log(res.json(notesData));
  
 });
 
@@ -45,7 +45,7 @@ app.post('/api/notes', (req, res) => {
   console.log('hello 45');
   const { title, text } = req.body;
   console.log('hello 47');
-  // reqNote = JSON.parse(req.body);
+  // source of codefor unique UD: UofU bootcamp, module# 11, activity #21
   if (req.body) {
     console.log('hello 50');
     const newNote = {
