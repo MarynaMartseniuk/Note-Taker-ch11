@@ -9,7 +9,7 @@ const id = require('./helpers/id.js');
 //const api = require('./public/assets/js/index')
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 // 2.Middleware:
 // Middleware to use folder Public with static data
@@ -31,61 +31,66 @@ app.get('/notes', (req, res) => {
 });
 
 
-
-
 app.get('/api/notes', (req, res) => {
   
   res.json(notesData);
   console.log('###############code got inside of app.get(/api/notes) on a server.js');
   console.log(res.json(notesData));
-
-  
+ 
 });
-
-
-
-
 
 app.post('/api/notes', (req, res) => {
   
   // console.log(req.body);
-   const { title, text } = req.body;
-  console.log('hello 53');
+  console.log('hello 45');
+  const { title, text } = req.body;
+  console.log('hello 47');
   // reqNote = JSON.parse(req.body);
   if (req.body) {
-    console.log('hello 56');
+    console.log('hello 50');
     const newNote = {
       title: title,
       text: text,
       id: id(),
     };
     console.log(newNote);
-    // fs.appendFile('db.json', JSON.stringify(newNote));
+    console.log('hello 57');
 
-    //fs.appendFile('db.json', newNote);
+    // function appendNewNote(newData) {
+    const  appendNewNote = (newData) => {
+      // let's get data from db.json, then add new data (a new note) to it, and then write updated data to db.json. So this way we can add a new data correctly (inside of an existing array)
+      fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
 
-    fs.appendFile('./db/db.json', JSON.stringify(newNote), (err) => {
-      if (err) {
-        console.error('Error writing to file:', err);
-      } else {
-        console.log('Data successfully appended to file!');
-      }
-    });
+          console.error(err);
+          return;
+
+        } else {
+
+          console.log(data);
+          console.log('hello 67')
+          const fileData = JSON.parse(data);
+          console.log(fileData);
+          console.log('hello 70');
+          fileData.push(newData);
+          
+          fs.writeFile('./db/db.json', JSON.stringify(fileData), err => {
+            if (err) {
+              console.error(err);
+            };
+          });
+
+        };
+
+      });
+     
+    };
+
+    appendNewNote(newNote);
+
   };
 
 });
-
-// fs.appendFile('filename.txt', 'Data to append', (err) => {
-//   if (err) {
-//     console.error('Error writing to file:', err);
-//   } else {
-//     console.log('Data successfully appended to file!');
-//   }
-// });
-
-
-
-
 
 
 // a get URL 'localhost:3001/*' request from user will bring/display to user the landing page (home-page) , which is index.html file. '*' - stands for any user input

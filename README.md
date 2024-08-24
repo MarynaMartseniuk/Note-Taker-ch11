@@ -21,6 +21,8 @@ Note Taker is an App that can be used to write and save notes. This application 
 ## Credits
 1. source of starter code is bootcamp UofU: https://github.com/coding-boot-camp/miniature-eureka
 2. sourse of code: UofU bootcamp, module# 11, activities ## 05,17, 21
+3. sourse of code:https://nodejs.org/en/learn/manipulating-files/reading-files-with-nodejs
+4. source of code: https://nodejs.org/en/learn/manipulating-files/writing-files-with-nodejs
 
 ## License
 
