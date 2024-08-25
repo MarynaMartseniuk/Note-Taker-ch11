@@ -5,49 +5,50 @@ const fs = require('fs');
 
 const notesData = require('./db/db.json');
 const id = require('./helpers/id.js');
+
+// // setup routes folder:
 // const api = require('./routes/index.js');
-//const api = require('./public/assets/js/index')
 
 const app = express();
 const PORT = 3001;
 
 // 2.Middleware:
-// Middleware to use folder Public with static data
+// Middleware to use Public folder  with static data
 app.use(express.static('public'));
 // Middleware to work with user's request using 'req.body' in a JSON format
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Send all 'localhost:3001/api' routes to the routes folder to use the index.js
+
+// // Send all 'localhost:3001/api' routes to the routes folder to use the index.js
 //app.use('/api', api);
-
-
 
 //3.routes
 // sourse: UofU bootcamp, module 11, activity 05
-// a get URL 'localhost:3001/notes' request from user will bring/display to user the notes.html file 
+// a get request for URL 'localhost:3001/notes' route  will bring/display the notes.html file 
 app.get('/notes', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/notes.html'))
-    console.log('@@@@@@@@@@@@@@@code got inside of app.get(/notes) on a server.js');
+    console.log('@@@@@@code got inside of app.get(/notes) on a server.js');
 });
 
-
+// a get request for URL 'localhost:3001/notes' route  will get data from ('./db/db.json') in json format.
 app.get('/api/notes', (req, res) => {
-  console.log('###############code got inside of app.get(/api/notes) on a server.js');
+  console.log('#####code got inside of app.get(/api/notes) on a server.js');
   res.json(notesData);
   console.log(notesData);
    
 });
 
+// a get request for URL 'localhost:3001/notes/:id' route  will get data for requested id from ('./db/db.json') in json format.
 app.get('/api/notes/:id', (req, res) => {
-  console.log('????????????????????????code got inside of app.get(/api/notes/:id) on a server.js');
+  console.log('?????code got inside of app.get(/api/notes/:id) on a server.js');
 
-  console.log('notesData array from db.json has following data:')
-  console.log(notesData);
-  console.log(notesData[0].id);
-  console.log(notesData.length);
-  console.log('user requested a note from db.json by the following ID:')
-  console.log(req.params.id);
-  console.log('Was ID displayed above?');
+  // console.log('notesData array from db.json has following data:')
+  // console.log(notesData);
+  // console.log(notesData[0].id);
+  // console.log(notesData.length);
+  // console.log('user requested a note from db.json by the following ID:')
+  // console.log(req.params.id);
+  // console.log('Was ID displayed above?');
   
 
   for (let i = 0; i < notesData.length; i++) {
@@ -59,6 +60,7 @@ app.get('/api/notes/:id', (req, res) => {
   return res.json('requested DATA was not found');
 });
 
+// a post request for URL 'localhost:3001/notes' route  will save a new note data to ('./db/db.json').
 app.post('/api/notes', (req, res) => {
   
   // console.log(req.body);
@@ -86,30 +88,40 @@ app.post('/api/notes', (req, res) => {
           return;
 
         } else {
-
+          console.log('hello 65')
           console.log(data);
           console.log('hello 67')
           const fileData = JSON.parse(data);
           console.log(fileData);
           console.log('hello 70');
+          console.log(typeof(newData));
           fileData.push(newData);
-          
+          console.log(fileData);
+          console.log('hello 98');
+
           fs.writeFile('./db/db.json', JSON.stringify(fileData), err => {
             if (err) {
               console.error(err);
             };
+            console.log('new note is added to db')
           });
-
+          console.log('hello 105');
+          console.log(fileData);
+          console.log('hello 107');
+          return res.json(fileData);
         };
-
+        console.log('hello 108');
+       
+        
       });
-     
+      console.log('hello 109');
     };
-
+    console.log('hello 111')
     appendNewNote(newNote);
-
+    // res.json(newData);
+    // console.log(json(newData));
   };
-
+  //res.json(newData);
 });
 
 

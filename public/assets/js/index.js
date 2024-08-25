@@ -114,8 +114,11 @@ const handleNoteSave = () => {
 
   saveNote(newNote);
   console.log('A new note is saved! Check db.json!');
+
   getAndRenderNotes();
+  console.log('An updated noteList is displayed! Find your new note in it!');
   renderActiveNote();
+  console.log('done with note save and render!')
 };
 
 //===================================================
