@@ -113,6 +113,41 @@ app.post('/api/notes', (req, res) => {
 });
 
 
+
+
+app.delete('/api/notes/:id', (req, res) => {
+  console.log('&&&&&&&&&&&&code got inside of app.delete(/api/notes/:id) on a server.js');
+
+  console.log('notesData array from db.json has following data:')
+  console.log(notesData);
+  console.log(notesData[0].id);
+  console.log(notesData.length);
+  console.log('user requested a note from db.json by the following ID:')
+  console.log(req.params.id);
+  console.log('Was ID displayed above?');
+  
+  for (let i = 0; i < notesData.length; i++) {
+    if (req.params.id === notesData[i].id) {
+      
+      notesData.splice(i, 1);
+      fs.writeFile('./db/db.json', JSON.stringify(notesData), err => {
+        if (err) {
+          console.error(err);
+        };
+      });
+
+    }
+  };
+  return res.json(notesData);
+});
+
+
+
+
+
+
+
+
 // a get URL 'localhost:3001/*' request from user will bring/display to user the landing page (home-page) , which is index.html file. '*' - stands for any user input
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, 'public/index.html'))
