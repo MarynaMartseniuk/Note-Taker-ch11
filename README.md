@@ -25,17 +25,19 @@ Note Taker is an App that can be used to write and save notes. This application 
 4. in your browser use "localhost:3001" URL to see and use the App;
 5. click on "Get Started" button and the pages with notes will be open;
 
-!["Get Started" will look like:](https://)
+!["Get Started" will look like:](https://github.com/MarynaMartseniuk/Note-Taker-ch11/blob/main/public/assets/images/home-pg.jpg)
    
 4. if you would like to start a new note, you can start typing in the "Note Title" and "Note Text" windows. After you start to type in one of the windows, a "clear Form" button will appear. After you put data in both windows a "Save Note" button will appear. To save a new note click on  a "Save Note" button. This note will be saved and displayed in the left-hand column at the end of the note List.
 
-!["to start a new note" will look like:](https://)
+!["to start a new note" will look like:](https://github.com/MarynaMartseniuk/Note-Taker-ch11/blob/main/public/assets/images/home-notes.jpg)
 
-!["display of a new note" will look like:](https://)
+!["to save a new note" will look like:](https://github.com/MarynaMartseniuk/Note-Taker-ch11/blob/main/public/assets/images/add-note.jpg)
+
+!["display of a new note" will look like:](https://github.com/MarynaMartseniuk/Note-Taker-ch11/blob/main/public/assets/images/displayNew-note.jpg)
 
 5. if you would like to see any saved note, click on it in the left-hand list. It will be displaed in the right-hand area. A "New Note" button will appaer on the right top coner. If you click on it, you can start a new note.
 
-!["to see any saved note" will look like:](https://)
+!["to see any saved note" will look like:](https://github.com/MarynaMartseniuk/Note-Taker-ch11/blob/main/public/assets/images/see-note.jpg)
 
 6. if you would like to delete the note, click on "Garbage Can" icon and this note will be deleted.
 
