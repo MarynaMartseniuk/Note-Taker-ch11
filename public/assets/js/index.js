@@ -94,11 +94,16 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value
   };
-  saveNote(newNote).then(() => {
-    console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  // saveNote(newNote).then(() => {
+  //   console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
+  //   getAndRenderNotes();
+  //   renderActiveNote();
+  // });
+
+  saveNote(newNote);
+  console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
+  getAndRenderNotes();
+  renderActiveNote();
 };
 
 //===================================================
@@ -226,3 +231,6 @@ if (window.location.pathname === '/notes') {
 //===================================================
 getAndRenderNotes();
 
+function alertSaveFunction(){
+  alert("your new Note was saved! Cleack Clear Button, please!");
+};
