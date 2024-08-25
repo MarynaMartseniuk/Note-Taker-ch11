@@ -20,7 +20,7 @@ Note Taker is an App that can be used to write and save notes. This application 
 ### To use this App you need to install NodeJS on your PC, copy this repo with a code, then use a Command Line to run this App. 
 
 ## Usage
-1. go to the folder with the code;
+1. in the Command Line/GitBush/Terminal go to the folder with the code;
 2. run ""npm install" to buid the App;
 3. run "node server.js" to start the App;
 4. in your browser use "localhost:3001" URL to see and use the App;
