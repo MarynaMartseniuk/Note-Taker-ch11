@@ -51,11 +51,5 @@ Note Taker is an App that can be used to write and save notes. This application 
 ### All assets and code are under the MIT license. Please, check more info in lisence section of this repo or use this link https://choosealicense.com/licenses/mit/.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
-### this section is comming soone.
-
 ## How to Contribute
-### this section is comming soon
-
-## Tests
 ### this section is comming soon
