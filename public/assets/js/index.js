@@ -5,6 +5,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+// if URL is 'localhost:3001/notes' the take all this elements:
 if (window.location.pathname === '/notes') {
   noteForm = document.querySelector('.note-form');
   noteTitle = document.querySelector('.note-title');
@@ -17,11 +18,13 @@ if (window.location.pathname === '/notes') {
 
 // ==================================================
 // Show an element
+// style attrebute to display an element. Use it for buttons (./css/style.css)
 const show = (elem) => {
   elem.style.display = 'inline';
 };
 
 // Hide an element
+// style attrebute to delete from display an element. Use it for buttons (./css/style.css)
 const hide = (elem) => {
   elem.style.display = 'none';
 };
@@ -32,6 +35,10 @@ let activeNote = {};
 
 
 //===================================================
+
+// fetch requests to (./db/db.json)
+
+// to display all notes from (./db/db.json) to the left-hand column notes list
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -40,8 +47,8 @@ const getNotes = () =>
     }
   });
 
-//add a rote to GET note by ID
-//to display note (user has clicked on) (from the left-hand column notes list) in the right-hand column
+// add a route to GET note by ID
+// to display note (user has clicked on) (from the left-hand column notes list) in the right-hand column
 const getIdNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'GET',
@@ -50,6 +57,7 @@ const getIdNote = (id) =>
     }
   });
 
+// to save a new note that was input by user
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -59,6 +67,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
   });
 
+// to delete the note user click on the GARBAGE CAN (delete note button) by
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -69,6 +78,7 @@ const deleteNote = (id) =>
 
 
 //================================================== 
+// render necessary buttons
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
@@ -89,25 +99,31 @@ const renderActiveNote = () => {
 };
 
 //===================================================
+// Save a new note to (./db/db.json), then display updated noteList, then render necessary buttons.
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value
   };
-  // saveNote(newNote).then(() => {
-  //   console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
-  //   getAndRenderNotes();
-  //   renderActiveNote();
-  // });
+  //An original code. Fix the bug: (.then) is not getting executed
+  saveNote(newNote).then(() => {
+    console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
+    getAndRenderNotes();
+    renderActiveNote();
+    console.log('done with note save and render!')
+  });
 
-  saveNote(newNote);
-  console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
-  getAndRenderNotes();
-  renderActiveNote();
+  // saveNote(newNote);
+  // console.log('A new note is saved! Check db.json!');
+
+  // getAndRenderNotes();
+  // console.log('An updated noteList is displayed! Find your new note in it!');
+  // renderActiveNote();
+  // console.log('done with note save and render!')
 };
 
 //===================================================
-// Delete the clicked note
+// Delete the clicked note, then display updated noteList, then render necessary buttons.
 const handleNoteDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
@@ -126,7 +142,7 @@ const handleNoteDelete = (e) => {
 };
 
 //===================================================
-// Sets the activeNote and displays it
+// Sets the activeNote, then render necessary buttons
 const handleNoteView = (e) => {
   e.preventDefault();
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
@@ -134,7 +150,7 @@ const handleNoteView = (e) => {
 };
 
 //===================================================
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to and empty, render necessary buttons to allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   show(clearBtn);
@@ -161,10 +177,8 @@ const renderNoteList = async (notes) => {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
-  // ================================================
   let noteListItems = [];
 
-  //=================================================
   // Returns HTML element with or without a delete button
   const createLi = (text, delBtn = true) => {
     const liEl = document.createElement('li');
@@ -194,12 +208,10 @@ const renderNoteList = async (notes) => {
     return liEl;
   };
 
-  //=================================================
   if (jsonNotes.length === 0) {
     noteListItems.push(createLi('No saved Notes', false));
   }
 
-  //=================================================
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
     li.dataset.note = JSON.stringify(note);
@@ -208,18 +220,18 @@ const renderNoteList = async (notes) => {
   });
 
 
-//===================================================
   if (window.location.pathname === '/notes') {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
 
 //===================================================
-// Gets notes from the db and renders them to the sidebar
+// Gets notes from the (./db/db.json) and renders them to the sidebar on the left-hand side.
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 
 //===================================================
+// event listeners on the buttons when URL is 'localhost:3001/notes'
 if (window.location.pathname === '/notes') {
   console.log('I am listerning on events!!!!!!!!!!!!!!!!!!!!!!!!!!');
   saveNoteBtn.addEventListener('click', handleNoteSave);
@@ -229,8 +241,5 @@ if (window.location.pathname === '/notes') {
 }
 
 //===================================================
+// call the function the displays notes list on the left-hand side. It will be called when URL is 'localhost:3001/notes'
 getAndRenderNotes();
-
-function alertSaveFunction(){
-  alert("your new Note was saved! Cleack Clear Button, please!");
-};
