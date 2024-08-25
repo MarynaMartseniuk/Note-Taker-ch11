@@ -94,11 +94,16 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value
   };
-  saveNote(newNote).then(() => {
-    console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
-    getAndRenderNotes();
-    renderActiveNote();
-  });
+  // saveNote(newNote).then(() => {
+  //   console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
+  //   getAndRenderNotes();
+  //   renderActiveNote();
+  // });
+
+  saveNote(newNote);
+  console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
+  getAndRenderNotes();
+  renderActiveNote();
 };
 
 //===================================================
@@ -156,6 +161,7 @@ const renderNoteList = async (notes) => {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
 
+  // ================================================
   let noteListItems = [];
 
   //=================================================
@@ -220,9 +226,11 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   clearBtn.addEventListener('click', renderActiveNote);
   noteForm.addEventListener('input', handleRenderBtns);
-  // noteList.addEventListener('click', renderActiveNote);
 }
 
 //===================================================
 getAndRenderNotes();
 
+function alertSaveFunction(){
+  alert("your new Note was saved! Cleack Clear Button, please!");
+};

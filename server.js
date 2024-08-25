@@ -1,4 +1,4 @@
-//1.consts declaation:
+//1.consts declaration:
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -32,11 +32,31 @@ app.get('/notes', (req, res) => {
 
 
 app.get('/api/notes', (req, res) => {
-  
-  res.json(notesData);
   console.log('###############code got inside of app.get(/api/notes) on a server.js');
-  console.log(res.json(notesData));
- 
+  res.json(notesData);
+  console.log(notesData);
+   
+});
+
+app.get('/api/notes/:id', (req, res) => {
+  console.log('????????????????????????code got inside of app.get(/api/notes/:id) on a server.js');
+
+  console.log('notesData array from db.json has following data:')
+  console.log(notesData);
+  console.log(notesData[0].id);
+  console.log(notesData.length);
+  console.log('user requested a note from db.json by the following ID:')
+  console.log(req.params.id);
+  console.log('Was ID displayed above?');
+  
+
+  for (let i = 0; i < notesData.length; i++) {
+    if (req.params.id === notesData[i].id) {
+      console.log(notesData[i]);
+      return res.json(notesData[i]);
+    }
+  };
+  return res.json('requested DATA was not found');
 });
 
 app.post('/api/notes', (req, res) => {
@@ -45,7 +65,7 @@ app.post('/api/notes', (req, res) => {
   console.log('hello 45');
   const { title, text } = req.body;
   console.log('hello 47');
-  // reqNote = JSON.parse(req.body);
+  // source of codefor unique UD: UofU bootcamp, module# 11, activity #21
   if (req.body) {
     console.log('hello 50');
     const newNote = {
