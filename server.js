@@ -121,11 +121,8 @@ app.post('/api/notes', (req, res) => {
     // res.json(newData);
     // console.log(json(newData));
   };
-  //res.json(newData);
+  return res.json(notesData);
 });
-
-
-
 
 app.delete('/api/notes/:id', (req, res) => {
   console.log('&&&&&&&&&&&&code got inside of app.delete(/api/notes/:id) on a server.js');
@@ -153,19 +150,10 @@ app.delete('/api/notes/:id', (req, res) => {
   return res.json(notesData);
 });
 
-
-
-
-
-
-
-
 // a get URL 'localhost:3001/*' request from user will bring/display to user the landing page (home-page) , which is index.html file. '*' - stands for any user input
 app.get('*', (req, res) =>
   res.sendFile(path.join(__dirname, 'public/index.html'))
 );
-
-  
 
 //4.listen to a port 
 app.listen(PORT, () =>

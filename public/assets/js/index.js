@@ -105,20 +105,21 @@ const handleNoteSave = () => {
     title: noteTitle.value,
     text: noteText.value
   };
-  // An original code. Fix the bug: (.then) is not getting executed
-  // saveNote(newNote).then(() => {
-  //   console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
-  //   getAndRenderNotes();
-  //   renderActiveNote();
-  // });
+  //An original code. Fix the bug: (.then) is not getting executed
+  saveNote(newNote).then(() => {
+    console.log('!!!!!!!new note should be saved, Check db.json!!!!!!!');
+    getAndRenderNotes();
+    renderActiveNote();
+    console.log('done with note save and render!')
+  });
 
-  saveNote(newNote);
-  console.log('A new note is saved! Check db.json!');
+  // saveNote(newNote);
+  // console.log('A new note is saved! Check db.json!');
 
-  getAndRenderNotes();
-  console.log('An updated noteList is displayed! Find your new note in it!');
-  renderActiveNote();
-  console.log('done with note save and render!')
+  // getAndRenderNotes();
+  // console.log('An updated noteList is displayed! Find your new note in it!');
+  // renderActiveNote();
+  // console.log('done with note save and render!')
 };
 
 //===================================================
