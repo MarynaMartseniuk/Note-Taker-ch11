@@ -2,10 +2,10 @@
 Note Taker is an App that can be used to write and save notes. This application uses an Express.js back end and saves and retrieves note data from a JSON file.
 
 ## Description
-### Motivation to create this App was a wish to have a simple Note-taker so that I can easy add and look thruogh important info, so I will not miss anything important event.
+### Motivation to create this App was a wish to have a simple Note-taker so that I can easy add and look through important info, so I will not miss any important event.
 ### I built this App because it had some new coding challanges needed to be solved. For me, as for a begginer, it was importent to get a new skills and got understanding that "I can do it!".
-### This App hepls a user create, save, look thruogh and delete important notes just in a minutes. It is an easy and simple to use!
-### This project was interesting and usefull for me because, as a begginer, I learned how perform the basics knowalage:
+### This App hepls a user create, save, look through  important notes and delete the one that are done just in a minutes. It is an easy and simple to use!
+### This project was interesting and usefull for me because, as a begginer, I learned how perform the basics knowlege:
 - to save user input into database-file (.json) and display it on the web-page,
 - how to manage user requests (GET, GET by id, POST, DELETE). 
 
